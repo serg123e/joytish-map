@@ -1,0 +1,405 @@
+{
+  "yogas": [
+    {
+      "name": "Sasa",
+      "category": "mahapurusha",
+      "category_label": "Mahapurusha",
+      "planets": [
+        "Sa"
+      ],
+      "planets_label": "Sa",
+      "all_planets": false,
+      "effect": "Wandering leader of free spirit",
+      "condition": "Saturn in a kendra in own or exaltation sign"
+    },
+    {
+      "name": "Sasa (from Moon)",
+      "category": "mahapurusha",
+      "category_label": "Mahapurusha",
+      "planets": [
+        "Sa"
+      ],
+      "planets_label": "Sa",
+      "all_planets": false,
+      "effect": "Wandering leader of free spirit",
+      "condition": "Saturn in a kendra in own or exaltation sign from Moon"
+    },
+    {
+      "name": "Vesi",
+      "category": "solar",
+      "category_label": "Solar",
+      "planets": [
+        "Me",
+        "Ve"
+      ],
+      "planets_label": "Me Ve",
+      "all_planets": false,
+      "effect": "Balanced, truthful and happy",
+      "condition": "Planets other than Moon in 2nd from Sun"
+    },
+    {
+      "name": "Chandra-Mangala",
+      "category": "lunar",
+      "category_label": "Lunar",
+      "planets": [
+        "Mo",
+        "Ma"
+      ],
+      "planets_label": "Mo Ma",
+      "all_planets": false,
+      "effect": "Worldly wise and materially successful",
+      "condition": "Moon and Mars together or in mutual 7ths"
+    },
+    {
+      "name": "Sunapha",
+      "category": "lunar",
+      "category_label": "Lunar",
+      "planets": [
+        "Me",
+        "Ve"
+      ],
+      "planets_label": "Me Ve",
+      "all_planets": false,
+      "effect": "Intelligent, wealthy and famous",
+      "condition": "Planets other than Sun in 2nd from Moon"
+    },
+    {
+      "name": "Kedara",
+      "category": "nabhasa",
+      "category_label": "Nabhasa",
+      "planets": [],
+      "planets_label": "All",
+      "all_planets": true,
+      "effect": "Happy, wealthy and helpful",
+      "condition": "Seven planets in four rasis"
+    },
+    {
+      "name": "Kala-Amrita",
+      "category": "other",
+      "category_label": "Other",
+      "planets": [],
+      "planets_label": "All",
+      "all_planets": true,
+      "effect": "Restrictions, extremes and suffering, inclines to spirituality, rejecting materialism",
+      "condition": "7 planets are placed in between the lunar nodes in the direction from Rahu to Ketu"
+    },
+    {
+      "name": "Parvata",
+      "category": "other",
+      "category_label": "Other",
+      "planets": [
+        "Mo"
+      ],
+      "planets_label": "Mo",
+      "all_planets": false,
+      "effect": "Fortunate, charitable, eloquent, easy-going, famous",
+      "condition": "Dispositor of Lagna lord in own sign or exaltation and in a kendra or trine"
+    },
+    {
+      "name": "Kahala",
+      "category": "other",
+      "category_label": "Other",
+      "planets": [
+        "Mo",
+        "Sa"
+      ],
+      "planets_label": "Mo Sa",
+      "all_planets": false,
+      "effect": "Strong, bold, cunning, leads a large army",
+      "condition": "The 4th lord is in own or exaltation sign conjoined or aspected by 10th lord"
+    },
+    {
+      "name": "Kahala",
+      "category": "other",
+      "category_label": "Other",
+      "planets": [
+        "Mo"
+      ],
+      "planets_label": "Mo",
+      "all_planets": false,
+      "effect": "Strong, bold, cunning, leads a large army",
+      "condition": "Dispositor of the dispositor of Lagna lord in own sign or exaltation and in a kendra or trine"
+    },
+    {
+      "name": "Trilochana",
+      "category": "other",
+      "category_label": "Other",
+      "planets": [
+        "Su",
+        "Mo",
+        "Ma"
+      ],
+      "planets_label": "Su Mo Ma",
+      "all_planets": false,
+      "effect": "Victorious over enemies, wealthy, intelligent, long-lived",
+      "condition": "Sun, Moon and Mars in mutual trines"
+    },
+    {
+      "name": "Raja",
+      "category": "raja_dhana",
+      "category_label": "Raja + Dhana",
+      "planets": [
+        "Ma"
+      ],
+      "planets_label": "Ma",
+      "all_planets": false,
+      "effect": "Successful and high achievements",
+      "condition": "Kendra lord in a trine or trine lord in a kendra"
+    },
+    {
+      "name": "Raja",
+      "category": "raja_dhana",
+      "category_label": "Raja + Dhana",
+      "planets": [
+        "Su"
+      ],
+      "planets_label": "Su",
+      "all_planets": false,
+      "effect": "Successful and high achievements",
+      "condition": "Kendra lord in a trine or trine lord in a kendra"
+    },
+    {
+      "name": "Raja",
+      "category": "raja_dhana",
+      "category_label": "Raja + Dhana",
+      "planets": [
+        "Ve"
+      ],
+      "planets_label": "Ve",
+      "all_planets": false,
+      "effect": "Successful and high achievements",
+      "condition": "Kendra lord in a trine or trine lord in a kendra"
+    },
+    {
+      "name": "Raja",
+      "category": "raja_dhana",
+      "category_label": "Raja + Dhana",
+      "planets": [
+        "Ma",
+        "Mo"
+      ],
+      "planets_label": "Ma Mo",
+      "all_planets": false,
+      "effect": "Successful and high achievements",
+      "condition": "Conjunction, aspect or exchange of kendra and trine lords"
+    },
+    {
+      "name": "Raja",
+      "category": "raja_dhana",
+      "category_label": "Raja + Dhana",
+      "planets": [
+        "Su",
+        "Ma"
+      ],
+      "planets_label": "Su Ma",
+      "all_planets": false,
+      "effect": "Successful and high achievements",
+      "condition": "Conjunction, aspect or exchange of kendra and trine lords"
+    },
+    {
+      "name": "Raja",
+      "category": "raja_dhana",
+      "category_label": "Raja + Dhana",
+      "planets": [
+        "Su",
+        "Mo"
+      ],
+      "planets_label": "Su Mo",
+      "all_planets": false,
+      "effect": "Successful and high achievements",
+      "condition": "Conjunction, aspect or exchange of kendra and trine lords"
+    },
+    {
+      "name": "Raja",
+      "category": "raja_dhana",
+      "category_label": "Raja + Dhana",
+      "planets": [
+        "Ma",
+        "Sa"
+      ],
+      "planets_label": "Ma Sa",
+      "all_planets": false,
+      "effect": "Successful and high achievements",
+      "condition": "Conjunction, aspect or exchange of kendra and trine lords"
+    },
+    {
+      "name": "Raja",
+      "category": "raja_dhana",
+      "category_label": "Raja + Dhana",
+      "planets": [
+        "Su",
+        "Mo",
+        "Ma"
+      ],
+      "planets_label": "Su Mo Ma",
+      "all_planets": false,
+      "effect": "Successful and high achievements",
+      "condition": "AK and PK together, 1st and 5th lords together"
+    },
+    {
+      "name": "Raja",
+      "category": "raja_dhana",
+      "category_label": "Raja + Dhana",
+      "planets": [
+        "Sa"
+      ],
+      "planets_label": "Sa",
+      "all_planets": false,
+      "effect": "Successful and high achievements",
+      "condition": "The 10th lord aspects Lagna from own or exaltation sign"
+    },
+    {
+      "name": "Raja",
+      "category": "raja_dhana",
+      "category_label": "Raja + Dhana",
+      "planets": [
+        "Me",
+        "Ju",
+        "Ve"
+      ],
+      "planets_label": "Me Ju Ve",
+      "all_planets": false,
+      "effect": "Will become a king or an equal",
+      "condition": "Benefics in 2nd, 4th and 5th from AK or Lagna lord"
+    },
+    {
+      "name": "Raja",
+      "category": "raja_dhana",
+      "category_label": "Raja + Dhana",
+      "planets": [
+        "Su",
+        "Ma"
+      ],
+      "planets_label": "Su Ma",
+      "all_planets": false,
+      "effect": "Will become a king",
+      "condition": "The 5th lord joins 1st or 9th lord in 1st, 4th or 10th"
+    },
+    {
+      "name": "Viparita Raja",
+      "category": "raja_dhana",
+      "category_label": "Raja + Dhana",
+      "planets": [
+        "Ju"
+      ],
+      "planets_label": "Ju",
+      "all_planets": false,
+      "effect": "Success after pressures or losses",
+      "condition": "The 12th lord in 6th or 8th"
+    },
+    {
+      "name": "Raja Sambandha",
+      "category": "raja_dhana",
+      "category_label": "Raja + Dhana",
+      "planets": [
+        "Me"
+      ],
+      "planets_label": "Me",
+      "all_planets": false,
+      "effect": "Will become a famous minister",
+      "condition": "AmK in a trine"
+    },
+    {
+      "name": "Raja Sambandha",
+      "category": "raja_dhana",
+      "category_label": "Raja + Dhana",
+      "planets": [
+        "Su",
+        "Ma"
+      ],
+      "planets_label": "Su Ma",
+      "all_planets": false,
+      "effect": "A king`s friend",
+      "condition": "Lagna lord or AK with 5th lord in a kendra or trine"
+    },
+    {
+      "name": "Dhana",
+      "category": "raja_dhana",
+      "category_label": "Raja + Dhana",
+      "planets": [
+        "Ma",
+        "Su"
+      ],
+      "planets_label": "Ma Su",
+      "all_planets": false,
+      "effect": "Wealth and prosperity",
+      "condition": "Conjunction, aspect or exchange of trine, 2nd and 11th lords"
+    },
+    {
+      "name": "Daridra",
+      "category": "other",
+      "category_label": "Other",
+      "planets": [
+        "Ju"
+      ],
+      "planets_label": "Ju",
+      "all_planets": false,
+      "effect": "Poverty",
+      "condition": "Lord of the 1st, 2nd, 5th, 9th or 11th in dusthana"
+    },
+    {
+      "name": "Daridra",
+      "category": "other",
+      "category_label": "Other",
+      "planets": [
+        "Me"
+      ],
+      "planets_label": "Me",
+      "all_planets": false,
+      "effect": "Poverty",
+      "condition": "Dusthana lord in the 1st, 2nd, 5th, 9th or 11th"
+    },
+    {
+      "name": "Daridra",
+      "category": "other",
+      "category_label": "Other",
+      "planets": [
+        "Ve",
+        "Me"
+      ],
+      "planets_label": "Ve Me",
+      "all_planets": false,
+      "effect": "Poverty",
+      "condition": "Conjunction, aspect or exchange of 1st, 2nd, 5th, 9th or 11th and dusthana lords"
+    },
+    {
+      "name": "Daridra",
+      "category": "other",
+      "category_label": "Other",
+      "planets": [
+        "Su",
+        "Ma"
+      ],
+      "planets_label": "Su Ma",
+      "all_planets": false,
+      "effect": "Poverty",
+      "condition": "Conjunction, aspect or exchange of 1st, 2nd, 5th, 9th or 11th and dusthana lords"
+    },
+    {
+      "name": "Daridra",
+      "category": "other",
+      "category_label": "Other",
+      "planets": [
+        "Ma",
+        "Sa"
+      ],
+      "planets_label": "Ma Sa",
+      "all_planets": false,
+      "effect": "Poverty",
+      "condition": "Conjunction, aspect or exchange of 1st, 2nd, 5th, 9th or 11th and dusthana lords"
+    },
+    {
+      "name": "Neecha Bhanga",
+      "category": "other",
+      "category_label": "Other",
+      "planets": [
+        "Ma"
+      ],
+      "planets_label": "Ma",
+      "all_planets": false,
+      "effect": "Cancellation of debilitation of the planet",
+      "condition": "- Debilitated planet in a kendra from Moon or Lagna - Dispositor of debilitated planet in a kendra from Moon or Lagna - Lord of the sign of exaltation of the falling planet in kendra from Moon or Lagna"
+    }
+  ],
+  "divisional": "D1"
+}

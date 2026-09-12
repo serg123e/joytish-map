@@ -1,0 +1,304 @@
+{
+  "style": "north",
+  "divisional": "D1",
+  "chart": {
+    "name": "Ss",
+    "date": "07.08.1983",
+    "time": "23:00:00",
+    "timezone": "+4",
+    "latitude": "55.45",
+    "longitude": "37.37"
+  },
+  "houses": [
+    {
+      "house": 1,
+      "sign": {
+        "number": 1,
+        "code": "Ar",
+        "name": "Aries"
+      },
+      "planets": [
+        {
+          "code": "As",
+          "degree": 0,
+          "degree_label": "00°",
+          "retrograde": false
+        }
+      ],
+      "aspects": [
+        "Sa"
+      ]
+    },
+    {
+      "house": 2,
+      "sign": {
+        "number": 2,
+        "code": "Ta",
+        "name": "Taurus"
+      },
+      "planets": [],
+      "aspects": [
+        "Ju"
+      ]
+    },
+    {
+      "house": 3,
+      "sign": {
+        "number": 3,
+        "code": "Ge",
+        "name": "Gemini"
+      },
+      "planets": [
+        {
+          "code": "Ra",
+          "degree": 0,
+          "degree_label": "00°",
+          "retrograde": true
+        }
+      ],
+      "aspects": []
+    },
+    {
+      "house": 4,
+      "sign": {
+        "number": 4,
+        "code": "Cn",
+        "name": "Cancer"
+      },
+      "planets": [
+        {
+          "code": "Ma",
+          "degree": 2,
+          "degree_label": "02°",
+          "retrograde": false
+        },
+        {
+          "code": "Mo",
+          "degree": 6,
+          "degree_label": "06°",
+          "retrograde": false
+        },
+        {
+          "code": "Su",
+          "degree": 21,
+          "degree_label": "21°",
+          "retrograde": false
+        }
+      ],
+      "aspects": [
+        "Ju",
+        "Sa"
+      ]
+    },
+    {
+      "house": 5,
+      "sign": {
+        "number": 5,
+        "code": "Le",
+        "name": "Leo"
+      },
+      "planets": [
+        {
+          "code": "Ve",
+          "degree": 15,
+          "degree_label": "15°",
+          "retrograde": true
+        },
+        {
+          "code": "Me",
+          "degree": 15,
+          "degree_label": "15°",
+          "retrograde": false
+        }
+      ],
+      "aspects": []
+    },
+    {
+      "house": 6,
+      "sign": {
+        "number": 6,
+        "code": "Vi",
+        "name": "Virgo"
+      },
+      "planets": [],
+      "aspects": []
+    },
+    {
+      "house": 7,
+      "sign": {
+        "number": 7,
+        "code": "Li",
+        "name": "Libra"
+      },
+      "planets": [
+        {
+          "code": "Sa",
+          "degree": 5,
+          "degree_label": "05°",
+          "retrograde": false
+        }
+      ],
+      "aspects": [
+        "Ma"
+      ]
+    },
+    {
+      "house": 8,
+      "sign": {
+        "number": 8,
+        "code": "Sc",
+        "name": "Scorpio"
+      },
+      "planets": [
+        {
+          "code": "Ju",
+          "degree": 7,
+          "degree_label": "07°",
+          "retrograde": false
+        }
+      ],
+      "aspects": []
+    },
+    {
+      "house": 9,
+      "sign": {
+        "number": 9,
+        "code": "Sg",
+        "name": "Sagittarius"
+      },
+      "planets": [
+        {
+          "code": "Ke",
+          "degree": 0,
+          "degree_label": "00°",
+          "retrograde": true
+        }
+      ],
+      "aspects": [
+        "Sa"
+      ]
+    },
+    {
+      "house": 10,
+      "sign": {
+        "number": 10,
+        "code": "Cp",
+        "name": "Capricorn"
+      },
+      "planets": [],
+      "aspects": [
+        "Su",
+        "Mo",
+        "Ma"
+      ]
+    },
+    {
+      "house": 11,
+      "sign": {
+        "number": 11,
+        "code": "Aq",
+        "name": "Aquarius"
+      },
+      "planets": [],
+      "aspects": [
+        "Ma",
+        "Me",
+        "Ve"
+      ]
+    },
+    {
+      "house": 12,
+      "sign": {
+        "number": 12,
+        "code": "Pi",
+        "name": "Pisces"
+      },
+      "planets": [],
+      "aspects": [
+        "Ju"
+      ]
+    }
+  ],
+  "planets": [
+    {
+      "code": "As",
+      "house": 1,
+      "sign": "Ar",
+      "sign_number": 1,
+      "degree": 0,
+      "retrograde": false
+    },
+    {
+      "code": "Su",
+      "house": 4,
+      "sign": "Cn",
+      "sign_number": 4,
+      "degree": 21,
+      "retrograde": false
+    },
+    {
+      "code": "Mo",
+      "house": 4,
+      "sign": "Cn",
+      "sign_number": 4,
+      "degree": 6,
+      "retrograde": false
+    },
+    {
+      "code": "Ma",
+      "house": 4,
+      "sign": "Cn",
+      "sign_number": 4,
+      "degree": 2,
+      "retrograde": false
+    },
+    {
+      "code": "Me",
+      "house": 5,
+      "sign": "Le",
+      "sign_number": 5,
+      "degree": 15,
+      "retrograde": false
+    },
+    {
+      "code": "Ju",
+      "house": 8,
+      "sign": "Sc",
+      "sign_number": 8,
+      "degree": 7,
+      "retrograde": false
+    },
+    {
+      "code": "Ve",
+      "house": 5,
+      "sign": "Le",
+      "sign_number": 5,
+      "degree": 15,
+      "retrograde": true
+    },
+    {
+      "code": "Sa",
+      "house": 7,
+      "sign": "Li",
+      "sign_number": 7,
+      "degree": 5,
+      "retrograde": false
+    },
+    {
+      "code": "Ra",
+      "house": 3,
+      "sign": "Ge",
+      "sign_number": 3,
+      "degree": 0,
+      "retrograde": true
+    },
+    {
+      "code": "Ke",
+      "house": 9,
+      "sign": "Sg",
+      "sign_number": 9,
+      "degree": 0,
+      "retrograde": true
+    }
+  ]
+}

@@ -1,0 +1,682 @@
+{
+  "divisional": "D1",
+  "planets": [
+    {
+      "code": "As",
+      "name": "Ascendant",
+      "retrograde": false,
+      "karaka": null,
+      "degrees": "00°33'53''",
+      "degrees_decimal": 0.564722,
+      "rasi": {
+        "code": "Ar",
+        "name": "Aries",
+        "dignity": null
+      },
+      "navamsa": "Aries",
+      "nakshatra": {
+        "code": "Ash",
+        "name": "Ashvini",
+        "pada": 1,
+        "lord": "Ke"
+      },
+      "relationship": null,
+      "house": null,
+      "lords": [],
+      "functional_beneficence": null,
+      "natural_beneficence": null,
+      "shad_bala": null,
+      "bindu": {
+        "sav": 35,
+        "bav": 5
+      },
+      "position": [
+        {
+          "code": "G1°",
+          "description": "Gandanta. The closer to the border of the water/fire sign - the stronger the defeat"
+        },
+        {
+          "code": "S",
+          "description": "Sandhi. The closer to the border between the signs - the stronger the defeat"
+        },
+        {
+          "code": "MB",
+          "description": "Mrityu Bhaga. The live indicators and health are destroying, a touch of the malefic is added"
+        },
+        {
+          "code": "V",
+          "description": "Vargottama. The same sign in Navamsa strengthens the planet as if it were in own sign"
+        }
+      ],
+      "planetary_war": null
+    },
+    {
+      "code": "Su",
+      "name": "Sun",
+      "retrograde": false,
+      "karaka": "AK",
+      "degrees": "21°05'41''",
+      "degrees_decimal": 21.094722,
+      "rasi": {
+        "code": "Cn",
+        "name": "Cancer",
+        "dignity": "Friend"
+      },
+      "navamsa": "Capricorn",
+      "nakshatra": {
+        "code": "Asl",
+        "name": "Aslesha",
+        "pada": 2,
+        "lord": "Me"
+      },
+      "relationship": "Neutral",
+      "house": 4,
+      "lords": [
+        {
+          "house": 5,
+          "in_house": 4,
+          "co_lord": false,
+          "label": "5th"
+        }
+      ],
+      "functional_beneficence": {
+        "code": "B",
+        "description": "Benefic. 100% benefic"
+      },
+      "natural_beneficence": {
+        "code": "M",
+        "description": "Malefic. 100% malefic"
+      },
+      "shad_bala": 124,
+      "bindu": {
+        "sav": 26,
+        "bav": 7
+      },
+      "position": [
+        {
+          "code": "ZDB",
+          "description": "Zero Dig Bala. The house that prevents to the full potential of the planet"
+        }
+      ],
+      "planetary_war": null
+    },
+    {
+      "code": "Mo",
+      "name": "Moon",
+      "retrograde": false,
+      "karaka": "PK",
+      "degrees": "06°38'11''",
+      "degrees_decimal": 6.636389,
+      "rasi": {
+        "code": "Cn",
+        "name": "Cancer",
+        "dignity": "Own sign"
+      },
+      "navamsa": "Leo",
+      "nakshatra": {
+        "code": "Pus",
+        "name": "Pushya",
+        "pada": 1,
+        "lord": "Sa"
+      },
+      "relationship": "Own sign",
+      "house": 4,
+      "lords": [
+        {
+          "house": 4,
+          "in_house": 4,
+          "co_lord": false,
+          "label": "4th"
+        }
+      ],
+      "functional_beneficence": {
+        "code": "N+",
+        "description": "Neutral with a touch of benefic. 33% benefic"
+      },
+      "natural_beneficence": {
+        "code": "M",
+        "description": "Malefic. 100% malefic (29 Tithi)"
+      },
+      "shad_bala": 163,
+      "bindu": {
+        "sav": 26,
+        "bav": 1
+      },
+      "position": [
+        {
+          "code": "DB",
+          "description": "Dig Bala. The house that contributes to the full potential of the planet"
+        }
+      ],
+      "planetary_war": null
+    },
+    {
+      "code": "Ma",
+      "name": "Mars",
+      "retrograde": false,
+      "karaka": "DK",
+      "degrees": "02°33'32''",
+      "degrees_decimal": 2.558889,
+      "rasi": {
+        "code": "Cn",
+        "name": "Cancer",
+        "dignity": "Debilitation"
+      },
+      "navamsa": "Cancer",
+      "nakshatra": {
+        "code": "Pun",
+        "name": "Punarvasu",
+        "pada": 4,
+        "lord": "Ju"
+      },
+      "relationship": "Debilitation, 26°",
+      "house": 4,
+      "lords": [
+        {
+          "house": 1,
+          "in_house": 4,
+          "co_lord": false,
+          "label": "1st"
+        },
+        {
+          "house": 8,
+          "in_house": 4,
+          "co_lord": false,
+          "label": "8th"
+        }
+      ],
+      "functional_beneficence": {
+        "code": "B-",
+        "description": "Benefic with a touch of malefic. 67% benefic, 33% malefic"
+      },
+      "natural_beneficence": {
+        "code": "M+",
+        "description": "Strong malefic. 150% malefic"
+      },
+      "shad_bala": 134,
+      "bindu": {
+        "sav": 26,
+        "bav": 3
+      },
+      "position": [
+        {
+          "code": "ZDB",
+          "description": "Zero Dig Bala. The house that prevents to the full potential of the planet"
+        },
+        {
+          "code": "V",
+          "description": "Vargottama. The same sign in Navamsa strengthens the planet as if it were in own sign"
+        },
+        {
+          "code": "PN",
+          "description": "Pushkara Navamsa. Additional energy for the manifestation of favorable qualities (weaker than PB)"
+        }
+      ],
+      "planetary_war": null
+    },
+    {
+      "code": "Me",
+      "name": "Mercury",
+      "retrograde": false,
+      "karaka": "AmK",
+      "degrees": "15°48'08''",
+      "degrees_decimal": 15.802222,
+      "rasi": {
+        "code": "Le",
+        "name": "Leo",
+        "dignity": "Friend"
+      },
+      "navamsa": "Leo",
+      "nakshatra": {
+        "code": "PPh",
+        "name": "Purvaphalguni",
+        "pada": 1,
+        "lord": "Ve"
+      },
+      "relationship": "Big friend",
+      "house": 5,
+      "lords": [
+        {
+          "house": 3,
+          "in_house": 5,
+          "co_lord": false,
+          "label": "3rd"
+        },
+        {
+          "house": 6,
+          "in_house": 5,
+          "co_lord": false,
+          "label": "6th"
+        }
+      ],
+      "functional_beneficence": {
+        "code": "M+",
+        "description": "Strong malefic. 200% malefic"
+      },
+      "natural_beneficence": {
+        "code": "B",
+        "description": "Benefic. 100% benefic"
+      },
+      "shad_bala": 73,
+      "bindu": {
+        "sav": 28,
+        "bav": 5
+      },
+      "position": [
+        {
+          "code": "V",
+          "description": "Vargottama. The same sign in Navamsa strengthens the planet as if it were in own sign"
+        }
+      ],
+      "planetary_war": "✕"
+    },
+    {
+      "code": "Ju",
+      "name": "Jupiter",
+      "retrograde": false,
+      "karaka": "MK",
+      "degrees": "07°36'02''",
+      "degrees_decimal": 7.600556,
+      "rasi": {
+        "code": "Sc",
+        "name": "Scorpio",
+        "dignity": "Friend"
+      },
+      "navamsa": "Virgo",
+      "nakshatra": {
+        "code": "Anu",
+        "name": "Anuradha",
+        "pada": 2,
+        "lord": "Sa"
+      },
+      "relationship": "Neutral",
+      "house": 8,
+      "lords": [
+        {
+          "house": 9,
+          "in_house": 8,
+          "co_lord": false,
+          "label": "9th"
+        },
+        {
+          "house": 12,
+          "in_house": 8,
+          "co_lord": false,
+          "label": "12th"
+        }
+      ],
+      "functional_beneficence": {
+        "code": "B-",
+        "description": "Benefic with a touch of malefic. 67% benefic, 33% malefic"
+      },
+      "natural_beneficence": {
+        "code": "B+",
+        "description": "Strong benefic. 150% benefic"
+      },
+      "shad_bala": 94,
+      "bindu": {
+        "sav": 18,
+        "bav": 3
+      },
+      "position": [
+        {
+          "code": "HM",
+          "description": "Hemmed by malefics. The more malefics and the stronger they are - the stronger the defeat"
+        },
+        {
+          "code": "PN",
+          "description": "Pushkara Navamsa. Additional energy for the manifestation of favorable qualities (weaker than PB)"
+        }
+      ],
+      "planetary_war": null
+    },
+    {
+      "code": "Ve",
+      "name": "Venus",
+      "retrograde": true,
+      "karaka": "BK",
+      "degrees": "15°35'04''",
+      "degrees_decimal": 15.584444,
+      "rasi": {
+        "code": "Le",
+        "name": "Leo",
+        "dignity": "Enemy"
+      },
+      "navamsa": "Leo",
+      "nakshatra": {
+        "code": "PPh",
+        "name": "Purvaphalguni",
+        "pada": 1,
+        "lord": "Ve"
+      },
+      "relationship": "Neutral",
+      "house": 5,
+      "lords": [
+        {
+          "house": 2,
+          "in_house": 5,
+          "co_lord": false,
+          "label": "2nd"
+        },
+        {
+          "house": 7,
+          "in_house": 5,
+          "co_lord": false,
+          "label": "7th"
+        }
+      ],
+      "functional_beneficence": {
+        "code": "N-",
+        "description": "Neutral with a touch of malefic. 33% malefic"
+      },
+      "natural_beneficence": {
+        "code": "B",
+        "description": "Benefic. 100% benefic"
+      },
+      "shad_bala": 133,
+      "bindu": {
+        "sav": 28,
+        "bav": 5
+      },
+      "position": [
+        {
+          "code": "V",
+          "description": "Vargottama. The same sign in Navamsa strengthens the planet as if it were in own sign"
+        }
+      ],
+      "planetary_war": "✓"
+    },
+    {
+      "code": "Sa",
+      "name": "Saturn",
+      "retrograde": false,
+      "karaka": "GK",
+      "degrees": "05°14'05''",
+      "degrees_decimal": 5.234722,
+      "rasi": {
+        "code": "Li",
+        "name": "Libra",
+        "dignity": "Exaltation"
+      },
+      "navamsa": "Scorpio",
+      "nakshatra": {
+        "code": "Chi",
+        "name": "Chitra",
+        "pada": 4,
+        "lord": "Ma"
+      },
+      "relationship": "Exaltation, 15°",
+      "house": 7,
+      "lords": [
+        {
+          "house": 10,
+          "in_house": 7,
+          "co_lord": false,
+          "label": "10th"
+        },
+        {
+          "house": 11,
+          "in_house": 7,
+          "co_lord": false,
+          "label": "11th"
+        }
+      ],
+      "functional_beneficence": {
+        "code": "M",
+        "description": "Malefic. 100% malefic"
+      },
+      "natural_beneficence": {
+        "code": "M+",
+        "description": "Strong malefic. 150% malefic"
+      },
+      "shad_bala": 175,
+      "bindu": {
+        "sav": 25,
+        "bav": 2
+      },
+      "position": [
+        {
+          "code": "DB",
+          "description": "Dig Bala. The house that contributes to the full potential of the planet"
+        }
+      ],
+      "planetary_war": null
+    },
+    {
+      "code": "Ra",
+      "name": "Rahu",
+      "retrograde": true,
+      "karaka": null,
+      "degrees": "00°23'39''",
+      "degrees_decimal": 0.394167,
+      "rasi": {
+        "code": "Ge",
+        "name": "Gemini",
+        "dignity": "Moolatrikona"
+      },
+      "navamsa": "Libra",
+      "nakshatra": {
+        "code": "Mri",
+        "name": "Mrigashira",
+        "pada": 3,
+        "lord": "Ma"
+      },
+      "relationship": "Moolatrikona",
+      "house": 3,
+      "lords": [
+        {
+          "house": 11,
+          "in_house": 3,
+          "co_lord": true,
+          "label": "Co-lord 11th"
+        }
+      ],
+      "functional_beneficence": {
+        "code": "M",
+        "description": "Malefic. 100% malefic"
+      },
+      "natural_beneficence": {
+        "code": "M",
+        "description": "Malefic. 100% malefic"
+      },
+      "shad_bala": null,
+      "bindu": {
+        "sav": 31,
+        "bav": null
+      },
+      "position": [
+        {
+          "code": "S",
+          "description": "Sandhi. The closer to the border between the signs - the stronger the defeat"
+        }
+      ],
+      "planetary_war": null
+    },
+    {
+      "code": "Ke",
+      "name": "Ketu",
+      "retrograde": true,
+      "karaka": null,
+      "degrees": "00°23'39''",
+      "degrees_decimal": 0.394167,
+      "rasi": {
+        "code": "Sg",
+        "name": "Sagittarius",
+        "dignity": "Moolatrikona"
+      },
+      "navamsa": "Aries",
+      "nakshatra": {
+        "code": "Mul",
+        "name": "Mula",
+        "pada": 1,
+        "lord": "Ke"
+      },
+      "relationship": "Moolatrikona",
+      "house": 9,
+      "lords": [
+        {
+          "house": 8,
+          "in_house": 9,
+          "co_lord": true,
+          "label": "Co-lord 8th"
+        }
+      ],
+      "functional_beneficence": {
+        "code": "M",
+        "description": "Malefic. 100% malefic"
+      },
+      "natural_beneficence": {
+        "code": "M",
+        "description": "Malefic. 100% malefic"
+      },
+      "shad_bala": null,
+      "bindu": {
+        "sav": 28,
+        "bav": null
+      },
+      "position": [
+        {
+          "code": "G0°",
+          "description": "Gandanta. The closer to the border of the water/fire sign - the stronger the defeat"
+        },
+        {
+          "code": "S",
+          "description": "Sandhi. The closer to the border between the signs - the stronger the defeat"
+        }
+      ],
+      "planetary_war": null
+    }
+  ],
+  "ashtakavarga": {
+    "first_house_sign": 1,
+    "sav": [
+      35,
+      38,
+      31,
+      26,
+      28,
+      29,
+      25,
+      18,
+      28,
+      31,
+      27,
+      21
+    ],
+    "bav": {
+      "As": [
+        5,
+        5,
+        4,
+        3,
+        4,
+        7,
+        3,
+        3,
+        6,
+        3,
+        2,
+        4
+      ],
+      "Su": [
+        6,
+        5,
+        3,
+        7,
+        3,
+        3,
+        4,
+        1,
+        2,
+        6,
+        4,
+        4
+      ],
+      "Mo": [
+        4,
+        6,
+        4,
+        1,
+        4,
+        5,
+        3,
+        4,
+        6,
+        3,
+        6,
+        3
+      ],
+      "Ma": [
+        5,
+        4,
+        4,
+        3,
+        3,
+        4,
+        4,
+        1,
+        3,
+        5,
+        2,
+        1
+      ],
+      "Me": [
+        7,
+        6,
+        5,
+        4,
+        5,
+        3,
+        6,
+        4,
+        4,
+        4,
+        3,
+        3
+      ],
+      "Ju": [
+        5,
+        7,
+        3,
+        3,
+        6,
+        6,
+        3,
+        3,
+        5,
+        7,
+        5,
+        3
+      ],
+      "Ve": [
+        3,
+        6,
+        8,
+        4,
+        5,
+        4,
+        3,
+        4,
+        5,
+        2,
+        4,
+        4
+      ],
+      "Sa": [
+        5,
+        4,
+        4,
+        4,
+        2,
+        4,
+        2,
+        1,
+        3,
+        4,
+        3,
+        3
+      ]
+    }
+  },
+  "from": null
+}

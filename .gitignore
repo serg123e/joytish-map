@@ -1,0 +1,7 @@
+# Разборы живых людей: персональные данные, в репозиторий не попадают.
+clients/
+!clients/.gitkeep
+
+__pycache__/
+*.egg-info/
+.pytest_cache/
