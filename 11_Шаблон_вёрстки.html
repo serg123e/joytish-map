@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>ШАБЛОН. Заменить: Имя — Карта души</title>
+<!--
+  ШАБЛОН ВЁРСТКИ ОТЧЁТА v2.0
+  Сборка:  wkhtmltopdf --enable-local-file-access --encoding utf-8 report.html out.pdf
+  Шрифты:  DejaVu Serif / Liberation Serif (кириллица)
+  Всё, что в <!-- ЗАМЕНИТЬ --> — подставляется из Промпта 09.
+  После сборки ОБЯЗАТЕЛЬНО отрендерить страницы в картинки и просмотреть глазами.
+-->
+<style>
+  @page { size: A4; margin: 22mm 18mm 22mm 18mm; }
+  body {
+    font-family: 'DejaVu Serif', 'Liberation Serif', serif;
+    color: #3a2e25; font-size: 11.3pt; line-height: 1.55; background: #fffdf9;
+  }
+  h1,h2,h3,h4 { font-family: 'DejaVu Serif', serif; color: #7a3b1e; font-weight: bold; }
+  h1 { font-size: 22pt; border-bottom: 2px solid #c98a4b; padding-bottom: 6px; margin-top: 0; }
+  h2 { font-size: 16pt; color: #9c4a1f; margin-top: 30px; border-bottom: 1px solid #e0c9a6;
+       padding-bottom: 4px; position: relative; padding-left: 4px; }
+  h2::before { content: "◆"; color: #c98a4b; font-size: 12pt; margin-right: 8px; }
+  h3 { font-size: 13pt; color: #b05a1f; margin-top: 20px; }
+  h4 { font-size: 11.5pt; color: #7a3b1e; margin-bottom: 4px; }
+
+  /* ОБЛОЖКА */
+  .cover {
+    text-align: center; page-break-after: always;
+    border: 2px solid #c98a4b; outline: 1px solid #c98a4b; outline-offset: -10px;
+    margin: 14px; height: 246mm; box-sizing: border-box; padding-top: 95mm;
+    background: linear-gradient(180deg,#fffdf9 0%,#fbf1e0 55%,#fffdf9 100%);
+  }
+  .cover h1 { border: none; font-size: 30pt; }
+  .cover .subtitle { font-size: 14pt; color: #9c6b3e; margin-top: 10px; }
+  .cover .flourish { color: #c98a4b; font-size: 22pt; margin-top: 18px; letter-spacing: 8px; }
+  .cover .name { font-size: 20pt; margin-top: 40px; color: #7a3b1e; font-style: italic; }
+  .cover .mantra { margin-top: 60px; font-size: 10.5pt; color: #9c6b3e; line-height: 1.8; }
+
+  .toc { page-break-after: always; }
+  .toc ol { line-height: 2; font-size: 11.5pt; }
+  .section-break { page-break-before: always; }
+  .divider { text-align: center; color: #c98a4b; font-size: 16pt; margin: 24px 0; }
+
+  .callout { background:#fbeedd; border-left:4px solid #c98a4b; padding:10px 16px;
+             margin:14px 0; border-radius:3px; }
+  .note { font-size: 9.8pt; color: #8a7a6a; font-style: italic; }
+  .drop { float:left; font-size:42pt; line-height:0.8; padding-right:8px; padding-top:6px;
+          color:#c98a4b; }
+
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 10.5pt; }
+  th, td { border: 1px solid #e0c9a6; padding: 6px 8px; text-align: left; }
+  th { background: #f3e2c7; }
+
+  /* ШКАЛА 1: "опора" — чип у заголовка паттерна */
+  .chip { display:inline-block; background:linear-gradient(135deg,#d99a52,#b0682a);
+          color:#fffaf3; font-size:11pt; font-weight:bold; padding:2px 12px;
+          border-radius:12px; margin-left:6px; }
+
+  /* ШКАЛА 2: уверенность — словесные метки */
+  .tag-high { color:#4a7c3a; font-weight:bold; }
+  .tag-med  { color:#b0842f; font-weight:bold; }
+  .tag-low  { color:#a13a2a; font-weight:bold; }
+  .bio-tag { display:inline-block; background:#e3ecd8; color:#4a7c3a; border:1px solid #b9d2a2;
+             font-size:9.5pt; font-weight:bold; padding:1px 10px; border-radius:10px; margin-left:6px; }
+
+  /* Карточка паттерна */
+  .card { background:#fdf7ee; border:1px solid #e6d2ab; border-left:5px solid #c98a4b;
+          border-radius:5px; padding:12px 18px; margin:16px 0; }
+  .card h3 { margin-top:4px; }
+
+  /* Списки ТОП-10: круглый бейдж + шкала */
+  ol.badge-list { list-style:none; padding-left:4px; counter-reset:item; }
+  ol.badge-list > li { position:relative; padding-left:40px; margin-bottom:11px; min-height:26px; }
+  ol.badge-list > li::before {
+    counter-increment:item; content:counter(item); position:absolute; left:0; top:-1px;
+    width:26px; height:26px; background:linear-gradient(135deg,#c98a4b,#8a4a1e);
+    color:#fffaf3; font-weight:bold; font-size:11pt; border-radius:50%;
+    text-align:center; line-height:26px; }
+  .bar { display:inline-block; vertical-align:middle; white-space:nowrap; }
+  .bar-track { display:inline-block; width:120px; height:9px; background:#eaddc7;
+               border-radius:5px; overflow:hidden; vertical-align:middle; margin:0 6px 0 4px; }
+  .bar-fill { display:inline-block; height:100%;
+              background:linear-gradient(90deg,#e0aa63,#a34a1f); border-radius:5px; }
+  .bar-num { font-weight:bold; color:#9c4a1f; font-size:10pt; vertical-align:middle; }
+
+  /* ШКАЛА 3: путь души — крупный индикатор (ТОЛЬКО в своей главе) */
+  .soul-meter { text-align:center; margin:22px 0 10px; }
+  .soul-num { font-size:46pt; font-weight:bold; color:#8a4a1e; line-height:1; }
+  .soul-num small { font-size:18pt; color:#b08050; font-weight:normal; }
+  .soul-label { font-size:11pt; color:#9c6b3e; letter-spacing:2px; margin-top:4px; }
+  .soul-track { width:100%; height:20px; background:#eaddc7; border-radius:10px;
+                overflow:hidden; margin:14px 0 4px; }
+  .soul-fill { height:100%; background:linear-gradient(90deg,#e6b477,#b0682a,#8a4a1e);
+               border-radius:10px; }
+  .soul-scale { display:flex; justify-content:space-between; font-size:9pt;
+                color:#8a7a6a; font-style:italic; }
+  .sub-meter { margin:12px 0; }
+  .sub-meter .lbl { font-size:10.5pt; font-weight:bold; color:#7a3b1e; }
+  .sub-track { width:100%; height:12px; background:#eaddc7; border-radius:6px;
+               overflow:hidden; margin:4px 0 2px; }
+  .sub-fill { height:100%; background:linear-gradient(90deg,#d99a52,#a34a1f); border-radius:6px; }
+
+  /* Камни: три цветовые категории */
+  .stone { background:#fdf7ee; border:1px solid #e6d2ab; border-radius:5px;
+           padding:11px 16px; margin:12px 0; }
+  .stone h4 { margin:0 0 6px 0; font-size:12pt; }
+  .stone-main  { border-left:5px solid #4a7c3a; }
+  .stone-soft  { border-left:5px solid #c98a4b; }
+  .stone-avoid { border-left:5px solid #a13a2a; background:#fbf0ed; }
+  .verdict-ok   { color:#4a7c3a; font-weight:bold; }
+  .verdict-care { color:#b0842f; font-weight:bold; }
+  .verdict-no   { color:#a13a2a; font-weight:bold; }
+
+  .redflag { color:#a13a2a; }
+  .final-page { text-align:center; padding-top:20%; }
+  .closing-line { font-size:14pt; font-style:italic; margin-top:40px; color:#7a3b1e; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>Карта души</h1>
+  <div class="subtitle">Натальный разбор в традиции Джйотиш</div>
+  <div class="flourish">✦ ✦ ✦</div>
+  <div class="name"><!-- ЗАМЕНИТЬ: Имя -->Имя<br>дата, место</div>
+  <div class="mantra">
+    ॐ सह नाववतु। सह नौ भुनक्तु।<br>
+    सह वीर्यं करवावहै। तेजस्वि नावधीतमस्तु।<br>
+    मा विद्विषावहै। ॐ शान्तिः शान्तिः शान्तिः॥
+  </div>
+</div>
+
+<div class="toc">
+<h2>Оглавление</h2>
+<ol>
+  <li>Ваша карта за 5 минут</li>
+  <li>10 главных паттернов</li>
+  <li>Основные сферы жизни</li>
+  <li>Центральная история жизни</li>
+  <li>ТОП-10 ресурсов</li>
+  <li>ТОП-10 рисков</li>
+  <li>ТОП-5 внутренних противоречий</li>
+  <li>ТОП-5 жизненных уроков</li>
+  <li>ТОП-5 точек роста</li>
+  <li>Красные флаги</li>
+  <li>Главные стратегии</li>
+  <li>Ближайшие 12–24 месяца</li>
+  <li>ТОП-10 действий с максимальной отдачей</li>
+  <li>Если оставить только 5 вещей</li>
+  <li>Пройденный путь души</li>
+  <li>Камни и минералы</li>
+  <li>Ароматы</li>
+  <li>Какая духовная традиция вам подходит</li>
+  <li>Протокол гармонизации</li>
+  <li>Письмо от души</li>
+  <li>Насколько можно доверять этому разбору</li>
+  <li>Приложение: техническая база</li>
+  <li>Что прислать для более глубокого разбора</li>
+</ol>
+</div>
+
+<!-- ================= ОБРАЗЦЫ БЛОКОВ — копировать и заполнять ================= -->
+
+<h2>1. Ваша карта за 5 минут</h2>
+<p><span class="drop">У</span><!-- ЗАМЕНИТЬ: первый абзац -->…</p>
+<div class="callout"><h4>5 главных ресурсов</h4>…</div>
+
+<h2>2. 10 главных паттернов</h2>
+<p class="note"><b>О цифрах в этой главе.</b> «Опора 85» — не процент и не вероятность. Это оценка того,
+насколько прочно вывод опирается на карту. Складывать эти числа между собой и путать со шкалой
+пути души (глава 15) нельзя — она считается по другой методике.</p>
+
+<div class="card">
+<h3>1. Название паттерна — <span class="chip">опора 85</span> <span class="bio-tag">✓ подтверждено</span></h3>
+<p><b>Суть:</b> …<br>
+<b>Как проявляется:</b> …<br>
+<b>Обратное:</b> …<br>
+<b>Зрелое:</b> … <b>Незрелое:</b> …<br>
+<b>Что делать:</b> …<br>
+<b>Уверенность:</b> <span class="tag-high">высокая</span></p>
+</div>
+
+<h2>5. ТОП-10 ресурсов</h2>
+<ol class="badge-list">
+<li>Название ресурса — <span class="bar"><span class="bar-track"><span class="bar-fill" style="width:90%"></span></span><span class="bar-num">90</span></span></li>
+</ol>
+
+<div class="section-break"></div>
+<h2>15. Пройденный путь души</h2>
+<p class="note"><b>Что это за шкала и чем она не является.</b> Авторский интегральный показатель зрелости
+астрологической конфигурации, а не классический показатель Джйотиш и не измерение духовного уровня
+человека. 0% не означает «плохой человек», 100% — не «лучшая душа».</p>
+<div class="soul-meter">
+  <div class="soul-num">68<small>/100</small></div>
+  <div class="soul-label">ПРОЙДЕННОСТЬ ПУТИ ДУШИ</div>
+  <div class="soul-track"><div class="soul-fill" style="width:68%"></div></div>
+  <div class="soul-scale"><span>0 — напряжённая конфигурация</span><span>50 — равновесие</span><span>100 — зрелая конфигурация</span></div>
+</div>
+<h3>Как получилось это число</h3>
+<table>
+<tr><th>Слой</th><th>Вес</th><th>Балл</th><th>Вклад</th></tr>
+<tr><td>D1 (Раши)</td><td>20%</td><td>—</td><td>—</td></tr>
+<tr><td>D9 (Навамша)</td><td>20%</td><td>—</td><td>—</td></tr>
+<tr><td>D60 (Шаштьямша)</td><td>30%</td><td>—</td><td>—</td></tr>
+<tr><td>Атмакарака / Каракамша</td><td>10%</td><td>—</td><td>—</td></tr>
+<tr><td>Дхармические и кармические йоги</td><td>10%</td><td>—</td><td>—</td></tr>
+<tr><td>D20 (Вимшамша)</td><td>10%</td><td>—</td><td>—</td></tr>
+<tr><td><b>Итого</b></td><td><b>100%</b></td><td>—</td><td><b>—</b></td></tr>
+</table>
+<div class="sub-meter">
+  <div class="lbl">Накопленный ресурс души — N/100</div>
+  <div class="sub-track"><div class="sub-fill" style="width:72%"></div></div>
+  <p>…</p>
+</div>
+
+<div class="section-break"></div>
+<h2>16. Камни и минералы</h2>
+<p class="note"><b>Главный принцип.</b> Камень — усилитель, а не лекарство. Нельзя автоматически носить
+камень слабой планеты: усилив её, вы усилите и то, чем она в вашей карте заведует.</p>
+<div class="stone stone-main">
+<h4>Основной камень: … — <span class="verdict-ok">показан</span></h4>
+<p><b>Какую планету усиливает:</b> …<br><b>Почему допустимо именно в этой карте:</b> …<br>
+<b>Ожидаемая сфера:</b> …<br><b>Металл:</b> … <b>Палец:</b> … <b>День:</b> …<br>
+<b>Минерал-заменитель:</b> …<br><b>Мантра:</b> …<br><b>Пробный период:</b> …<br>
+<b>Противопоказания по карте:</b> …</p>
+</div>
+<div class="stone stone-soft"><h4>Мягкий поддерживающий: … — <span class="verdict-care">возможен</span></h4><p>…</p></div>
+<div class="stone stone-avoid"><h4><span class="verdict-no">Без дополнительной проверки не использовать</span></h4><p>…</p></div>
+
+<div class="section-break final-page">
+<p style="font-size:13pt; font-style:italic; max-width:80%; margin:0 auto;">
+Разбор завершён. Всё полезное, что было здесь увидено, пусть станет основой для большей ясности и
+более мудрых поступков. Всё ошибочное, лишнее или не относящееся к человеку пусть будет оставлено
+без внимания. Ни одна интерпретация не является приговором и не отменяет свободы человека выбирать
+свои действия.
+</p>
+<div class="mantra" style="margin-top:50px; font-size:11pt; color:#9c6b3e; line-height:2;">
+ॐ सर्वे भवन्तु सुखिनः<br>सर्वे सन्तु निरामयाः।<br>
+सर्वे भद्राणि पश्यन्तु<br>मा कश्चिद् दुःखभाग्भवेत्।<br>
+ॐ शान्तिः शान्तिः शान्तिः॥
+</div>
+<div class="closing-line">Пространство разбора закрыто. Анализ завершён.</div>
+</div>
+
+</body>
+</html>
