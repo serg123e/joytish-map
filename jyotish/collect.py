@@ -378,7 +378,8 @@ def _ensure_session(
 ) -> tuple[Session, float]:
     """Open the session on first use, and keep the courtesy pause between calls."""
     if session is None:
-        session = Session(lang=client.collect.lang, http=_http_session())
+        session = Session(lang=client.collect.lang, http=_http_session(),
+                          timeout=client.collect.timeout)
         session.open()
         return session, time.monotonic()
     wait = client.collect.throttle - (time.monotonic() - last_call)

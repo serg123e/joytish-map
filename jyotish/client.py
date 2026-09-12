@@ -103,6 +103,10 @@ class CollectSettings:
     #: Vimshottari depth to fetch in full. Level 3 is ~700 rows already, so
     #: deeper levels are fetched only around the current moment.
     dasha_level: int = 2
+    #: Seconds to wait for one response. The heavier dasha tables can take the
+    #: site the better part of a minute to compute, well past the parser's own
+    #: 30-second default.
+    timeout: int = 90
 
 
 @dataclass(frozen=True)
@@ -209,6 +213,7 @@ class Client:
             deep_vargas=tuple(collect_raw.get("deep_vargas") or defaults.deep_vargas),
             throttle=float(collect_raw.get("throttle", defaults.throttle)),
             dasha_level=int(collect_raw.get("dasha_level", defaults.dasha_level)),
+            timeout=int(collect_raw.get("timeout", defaults.timeout)),
         )
 
         return cls(
@@ -245,6 +250,7 @@ birth_time:
 collect:
   lang: en              # en — vedic-horo.com, стабильнее; .ru роняет сессию
   throttle: 2.0         # секунд между запросами; сайт отвечает 429 при более частых
+  timeout: 90           # секунд на ответ; тяжёлые таблицы даш сайт считает долго
   dasha_level: 2
 """
 
