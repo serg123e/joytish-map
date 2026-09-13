@@ -17,7 +17,7 @@ from typing import Sequence
 
 from vedic_parser.session import VedicHoroError
 
-from . import patterns, render_raw, soul_path, validate
+from . import crosscheck, patterns, render_raw, soul_path, validate
 from .client import Client, ConfigError, scaffold
 from .collect import RateLimited, build_plan, collect, from_cache
 from .derive import derive_all
@@ -60,6 +60,11 @@ def build_parser() -> argparse.ArgumentParser:
     soul_cmd.add_argument("--template", action="store_true",
                           help="создать заготовку файла с баллами и выйти")
     soul_cmd.set_defaults(handler=_cmd_soul_path)
+
+    cross_cmd = sub.add_parser(
+        "crosscheck", help="сверить данные сайта с независимым локальным расчётом")
+    cross_cmd.add_argument("client")
+    cross_cmd.set_defaults(handler=_cmd_crosscheck)
 
     check_cmd = sub.add_parser("check", help="этап 10: чек-лист качества")
     check_cmd.add_argument("client")
@@ -198,6 +203,24 @@ def _cmd_soul_path(args: argparse.Namespace) -> int:
         print(f"  {note}")
     print(chapter)
     return 0
+
+
+def _cmd_crosscheck(args: argparse.Namespace) -> int:
+    client = Client.load(args.client)
+    try:
+        report = crosscheck.compare(client, from_cache(client).data)
+    except crosscheck.CrossCheckUnavailable as error:
+        print(f"{error}", file=sys.stderr)
+        return 3
+
+    path = client.root / "crosscheck.md"
+    path.write_text(crosscheck.render(report), encoding="utf-8")
+    conflicts = report.conflicts
+    print(f"сверено пунктов {len(report.findings)}, расхождений {len(conflicts)}")
+    for finding in conflicts:
+        print(f"  ✗ {finding.subject}: {finding.site} против {finding.local}")
+    print(path)
+    return 1 if conflicts else 0
 
 
 def _cmd_check(args: argparse.Namespace) -> int:

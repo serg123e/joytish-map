@@ -6,3 +6,7 @@ __pycache__/
 .pytest_cache/
 build/
 dist/
+
+# Эфемериды, которые skyfield скачивает при сверке
+*.bsp
+hip_main.dat
