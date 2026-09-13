@@ -89,13 +89,13 @@ HTML-фрагменты без Cloudflare-челленджа и без авто�
 ## 5. Устройство репозиториев
 
 Границу проводим по природе данных: `vedic-parser` знает про сайт и ничего не
-знает про методику; `joytish-map` знает методику и ничего не знает про HTML.
+знает про методику; `jyotish-map` знает методику и ничего не знает про HTML.
 
 ```
 vedic-parser/                  внешняя зависимость, чистые данные
 └── vedic_parser/              session, show-info/chart/other/dasha/bala …
 
-joytish-map/                   маркетплейс плагинов Claude Code
+jyotish-map/                   маркетплейс плагинов Claude Code
 ├── .claude-plugin/marketplace.json
 └── plugins/jyotish/           один плагин, самодостаточный
     ├── .claude-plugin/plugin.json

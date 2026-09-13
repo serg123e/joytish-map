@@ -3,8 +3,8 @@
 Ставится из маркетплейса в корне этого репозитория:
 
 ```
-/plugin marketplace add serg123e/joytish-map
-/plugin install jyotish@joytish-map
+/plugin marketplace add serg123e/jyotish-map
+/plugin install jyotish@jyotish-map
 ```
 
 Что внутри:

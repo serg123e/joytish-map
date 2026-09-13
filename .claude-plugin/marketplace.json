@@ -1,5 +1,5 @@
 {
-  "name": "joytish-map",
+  "name": "jyotish-map",
   "description": "Разбор карты Джйотиш: методика из десяти промптов и конвейер, который берёт на себя сбор данных, арифметику и проверки",
   "version": "0.1.0",
   "owner": {
@@ -14,8 +14,8 @@
       "description": "Ведёт разбор натальной карты по десяти этапам: собирает данные с vedic-horo, считает то, что должно считаться кодом, и не даёт проскочить гейты биографии и времени рождения",
       "version": "0.1.0",
       "author": { "name": "serg123e" },
-      "homepage": "https://github.com/serg123e/joytish-map",
-      "repository": "https://github.com/serg123e/joytish-map",
+      "homepage": "https://github.com/serg123e/jyotish-map",
+      "repository": "https://github.com/serg123e/jyotish-map",
       "category": "workflow",
       "keywords": ["jyotish", "vedic-astrology", "джйотиш", "pipeline"]
     }

@@ -1,4 +1,4 @@
-# joytish-map
+# jyotish-map
 
 Система разбора карты Джйотиш: методика из десяти промптов плюс код, который
 берёт на себя то, что не должна делать языковая модель.
@@ -27,8 +27,8 @@ ARCHITECTURE.md                    что автоматизируется, чт
 Как плагин Claude Code:
 
 ```
-/plugin marketplace add serg123e/joytish-map
-/plugin install jyotish@joytish-map
+/plugin marketplace add serg123e/jyotish-map
+/plugin install jyotish@jyotish-map
 ```
 
 Появятся команды `/jyotish:new`, `/jyotish:collect`, `/jyotish:stage`,
