@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# Self-bootstrapping launcher for the jyotish CLI.
+#
+# The plugin ships Python code with dependencies (vedic-parser, PyYAML,
+# requests), so it cannot just be run in place. Rather than making the user
+# remember `pip install`, the first invocation builds an isolated virtualenv
+# in the plugin's data directory and installs into it. Every later call is a
+# single exec.
+#
+# Deliberately isolated: nothing is installed into the user's own Python
+# environment, and the venv lives in CLAUDE_PLUGIN_DATA, which survives plugin
+# updates. The version marker forces a reinstall when the plugin version
+# changes, so an upgraded plugin never runs against stale code.
+
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+DATA="${CLAUDE_PLUGIN_DATA:-$ROOT/.local}"
+VENV="$DATA/venv"
+PYTHON="$VENV/bin/python"
+MARKER="$VENV/.installed"
+
+version() {
+    sed -n 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' \
+        "$ROOT/.claude-plugin/plugin.json" | head -1
+}
+
+bootstrap() {
+    local base
+    base="$(command -v python3 || true)"
+    if [ -z "$base" ]; then
+        echo "jyotish: нужен python3, но он не найден в PATH" >&2
+        exit 127
+    fi
+
+    echo "jyotish: первый запуск, ставлю зависимости в $VENV" >&2
+    echo "jyotish: это разово, дальше запуск мгновенный" >&2
+
+    mkdir -p "$DATA"
+    if ! "$base" -m venv "$VENV" >&2; then
+        echo "jyotish: не удалось создать venv. Поставьте пакет вручную:" >&2
+        echo "  pip install -e \"$ROOT\"" >&2
+        exit 1
+    fi
+    if ! "$PYTHON" -m pip install --quiet --upgrade pip >&2; then
+        echo "jyotish: не удалось обновить pip, продолжаю" >&2
+    fi
+    if ! "$PYTHON" -m pip install --quiet -e "$ROOT" >&2; then
+        echo "jyotish: установка не удалась." >&2
+        echo "Обычные причины: нет сети или не установлен git — зависимость" >&2
+        echo "vedic-parser ставится из GitHub. Проверьте и повторите, либо" >&2
+        echo "поставьте вручную: pip install -e \"$ROOT\"" >&2
+        rm -rf "$VENV"
+        exit 1
+    fi
+    version > "$MARKER"
+    echo "jyotish: готово" >&2
+}
+
+if [ ! -x "$PYTHON" ] || [ ! -f "$MARKER" ] || [ "$(cat "$MARKER")" != "$(version)" ]; then
+    bootstrap
+fi
+
+exec "$PYTHON" -m jyotish.cli "$@"

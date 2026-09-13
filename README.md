@@ -35,10 +35,15 @@ ARCHITECTURE.md                    что автоматизируется, чт
 `/jyotish:soul-path`, `/jyotish:check`, `/jyotish:status` и скилл, который
 ведёт разбор по этапам и не даёт проскочить гейты.
 
-Отдельно — Python-пакет с CLI, который эти команды вызывают:
+Больше ничего ставить не нужно: команды зовут CLI через launcher
+`bin/jyotish`, который при первом обращении сам поднимает изолированный venv в
+каталоге данных плагина. Первый вызов ~15 секунд, дальше мгновенно, системный
+Python не трогается.
+
+Для работы из терминала без Claude Code:
 
 ```sh
-pip install -e plugins/jyotish
+pip install -e plugins/jyotish     # или просто plugins/jyotish/bin/jyotish
 ```
 
 Данные берутся с [vedic-horo](https://vedic-horo.com) через
