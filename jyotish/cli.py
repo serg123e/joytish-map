@@ -3,20 +3,24 @@
     jyotish new ivan                 # create clients/ivan/chart.yaml to fill in
     jyotish collect clients/ivan     # stage 01: fetch, derive, write both files
     jyotish status clients/ivan      # what is collected, what is missing
+    jyotish soul-path clients/ivan   # stage 07: weights x scores, refuses if the gate is shut
+    jyotish check clients/ivan       # stage 10: the checklist, as far as code can take it
 """
 
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from pathlib import Path
 from typing import Sequence
 
 from vedic_parser.session import VedicHoroError
 
-from . import render_raw
+from . import patterns, render_raw, soul_path, validate
 from .client import Client, ConfigError, scaffold
-from .collect import RateLimited, build_plan, collect
+from .collect import RateLimited, build_plan, collect, from_cache
+from .derive import derive_all
 
 DEFAULT_CLIENTS_DIR = Path("clients")
 
@@ -45,6 +49,23 @@ def build_parser() -> argparse.ArgumentParser:
     status_cmd = sub.add_parser("status", help="что уже собрано и чего не хватает")
     status_cmd.add_argument("client")
     status_cmd.set_defaults(handler=_cmd_status)
+
+    soul_cmd = sub.add_parser(
+        "soul-path",
+        help="этап 07: посчитать показатель из баллов слоёв (soul_path_input.json)",
+    )
+    soul_cmd.add_argument("client")
+    soul_cmd.add_argument("--input", default=None,
+                          help="файл с баллами (по умолчанию <client>/soul_path_input.json)")
+    soul_cmd.add_argument("--template", action="store_true",
+                          help="создать заготовку файла с баллами и выйти")
+    soul_cmd.set_defaults(handler=_cmd_soul_path)
+
+    check_cmd = sub.add_parser("check", help="этап 10: чек-лист качества")
+    check_cmd.add_argument("client")
+    check_cmd.add_argument("--report", default=None,
+                           help="файл отчёта (по умолчанию <client>/report.md)")
+    check_cmd.set_defaults(handler=_cmd_check)
 
     return parser
 
@@ -108,6 +129,106 @@ def _cmd_status(args: argparse.Namespace) -> int:
         for request in todo:
             print(f"  {request.key}")
     return 0
+
+
+SOUL_TEMPLATE = {
+    "_": "Баллы 0–100 выставляет модель на этапе 07. Арифметику делает код: "
+         "вклад = вес × балл ÷ 100. Обоснование у каждого слоя обязательно — "
+         "балл без него Промпт 07 запрещает.",
+    "layers": [
+        {"key": key, "score": None, "rationale": ""}
+        for key, _title, _weight, _what in soul_path.LAYERS
+    ],
+    "subscales": [
+        {"key": key, "value": None, "explanation": ""}
+        for key, _title, _note in soul_path.SUBSCALES
+    ],
+    "raised_by": "",
+    "lowered_by": "",
+}
+
+
+def _cmd_soul_path(args: argparse.Namespace) -> int:
+    client = Client.load(args.client)
+    path = Path(args.input) if args.input else client.root / "soul_path_input.json"
+
+    if args.template:
+        if path.exists():
+            raise ConfigError(f"{path} уже существует")
+        path.write_text(json.dumps(SOUL_TEMPLATE, ensure_ascii=False, indent=2),
+                        encoding="utf-8")
+        print(f"создан {path}")
+        return 0
+
+    collection = from_cache(client)
+    available = soul_path.available_layers(collection.data)
+    try:
+        soul_path.check_gate(client, available)
+    except soul_path.GateClosed as error:
+        print(f"{error}", file=sys.stderr)
+        return 3
+
+    if not path.exists():
+        print(f"нет файла с баллами: {path}\nсоздайте заготовку: "
+              f"jyotish soul-path {args.client} --template", file=sys.stderr)
+        return 1
+
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    scores = [
+        soul_path.LayerScore(item["key"], item["score"], item.get("rationale", ""))
+        for item in payload["layers"] if item.get("score") is not None
+    ]
+    subscales = [
+        soul_path.Subscale(item["key"], item["value"], item.get("explanation", ""))
+        for item in payload["subscales"] if item.get("value") is not None
+    ]
+    result = soul_path.compute(
+        client, scores, subscales, available=available,
+        raised_by=payload.get("raised_by", ""), lowered_by=payload.get("lowered_by", ""),
+    )
+
+    client.ensure_dirs()
+    (client.root / "soul_path.json").write_text(
+        json.dumps(result.as_dict(), ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    chapter = client.stages_dir / "07.md"
+    chapter.write_text(soul_path.render(result), encoding="utf-8")
+    print(f"Пройденность пути души: {result.total:.0f}%")
+    for note in result.notes:
+        print(f"  {note}")
+    print(chapter)
+    return 0
+
+
+def _cmd_check(args: argparse.Namespace) -> int:
+    client = Client.load(args.client)
+    report_path = Path(args.report) if args.report else client.root / "report.md"
+    report = report_path.read_text(encoding="utf-8") if report_path.exists() else None
+    if report is None:
+        print(f"отчёта нет ({report_path}) — проверяются только пункты, "
+              "не требующие текста")
+
+    patterns_path = client.state_dir / "patterns.json"
+    chart_patterns = patterns.load(patterns_path) if patterns_path.exists() else None
+
+    collection = from_cache(client)
+    derived = None
+    if collection.get("show-chart-D1") and collection.get("show-info-D1"):
+        derived = derive_all(collection.get("show-chart-D1"), collection.get("show-info-D1"))
+
+    results = validate.review(client, report, chart_patterns=chart_patterns, derived=derived)
+    text = validate.render(results)
+    (client.root / "qa.md").write_text(text, encoding="utf-8")
+
+    failures = [r for r in results if r.failed]
+    warnings = [r for r in results if r.status == validate.WARN]
+    manual = [r for r in results if r.status == validate.MANUAL]
+    print(f"провалов {len(failures)}, требуют внимания {len(warnings)}, "
+          f"передано читателю {len(manual)}")
+    for result in failures + warnings:
+        print(f"  {result.status}: {result.check.number}. {result.check.text} — {result.detail}")
+    print(client.root / "qa.md")
+    return 1 if failures else 0
 
 
 def main(argv: Sequence[str] | None = None) -> int:
