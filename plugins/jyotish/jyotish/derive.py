@@ -263,12 +263,128 @@ def chara_karakas(show_info: dict[str, Any], *, tie_threshold: float = 0.05) -> 
 # ---------------------------------------------------------------------------
 
 
-def derive_all(show_chart_d1: dict[str, Any], show_info_d1: dict[str, Any]) -> dict[str, Any]:
+# ---------------------------------------------------------------------------
+# House strength
+# ---------------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class HouseStrength:
+    """Three independent readings of one house's strength.
+
+    Not a Bhava Bala. vedic-horo does not compute one, and reconstructing
+    Parashara's from memory would produce an authoritative-looking number
+    nobody could check — the exact failure `00_README` is written against.
+    Each figure here traces back to a number the site published:
+
+    * ``sav`` — Sarvashtakavarga bindus standing in this house;
+    * ``lord_shad_bala`` — the Shad Bala of the house's lord, as the site
+      reports it (this is the classical Bhavadhipathi Bala component);
+    * ``drishti_benefic`` / ``drishti_malefic`` — sums of the site's own
+      drishti virupas onto this house, split by the natural beneficence the
+      site assigns to each aspecting planet.
+
+    The three are deliberately not added together. Adding them would invent a
+    weighting the methodology never specified.
+    """
+
+    house: int
+    sign: int
+    lord: str
+    planets: tuple[str, ...]
+    sav: int | None
+    lord_shad_bala_percent: int | None
+    lord_shad_bala_rupas: float | None
+    drishti_benefic: float
+    drishti_malefic: float
+
+    @property
+    def drishti_net(self) -> float:
+        return self.drishti_benefic - self.drishti_malefic
+
+
+def house_strength(
+    show_chart: dict[str, Any],
+    show_info: dict[str, Any],
+    show_bala: dict[str, Any] | None = None,
+) -> list[HouseStrength]:
+    """The three indicators, per house.
+
+    Ashtakavarga bindus are indexed **by house**, not by sign — the parser
+    reads them from the chart drawing in house order, and ``first_house_sign``
+    says which sign house 1 holds. Indexing them by sign silently mislabels
+    every chart whose Ascendant is not Aries.
+    """
+    house_signs, planet_signs = chart_positions(show_chart)
+    occupants: dict[int, list[str]] = {house: [] for house in range(1, 13)}
+    for house in show_chart.get("houses", []):
+        occupants[house["house"]] = [p["code"] for p in house.get("planets", [])]
+
+    sav = (show_info.get("ashtakavarga") or {}).get("sav") or []
+
+    percent = {p.get("code"): p.get("shad_bala") for p in show_info.get("planets", [])}
+    rupas: dict[str, float | None] = {}
+    nature: dict[str, str] = {
+        p.get("code"): (p.get("natural_beneficence") or {}).get("code") or ""
+        for p in show_info.get("planets", [])
+    }
+    on_houses: dict[str, list[Any]] = {}
+    if show_bala:
+        for row in show_bala.get("shad_bala") or []:
+            total = (row.get("components") or {}).get("shad_bala") or {}
+            rupas[row.get("code")] = total.get("rupas")
+        on_houses = ((show_bala.get("aspects") or {}).get("on_houses") or {}).get("rows") or {}
+
+    result: list[HouseStrength] = []
+    for house in range(1, 13):
+        sign = house_signs[house]
+        lord = SIGN_LORDS[sign]
+        benefic = malefic = 0.0
+        for planet, row in on_houses.items():
+            value = row[house - 1] if len(row) >= house else None
+            if not isinstance(value, (int, float)):
+                continue  # "+" is the planet's own house, "-" the adjacent ones
+            if nature.get(planet, "").startswith("B"):
+                benefic += value
+            else:
+                malefic += value
+        result.append(HouseStrength(
+            house=house,
+            sign=sign,
+            lord=lord,
+            planets=tuple(occupants.get(house, [])),
+            sav=sav[house - 1] if len(sav) >= house else None,
+            lord_shad_bala_percent=percent.get(lord),
+            lord_shad_bala_rupas=rupas.get(lord),
+            drishti_benefic=benefic,
+            drishti_malefic=malefic,
+        ))
+    return result
+
+
+def derive_all(
+    show_chart_d1: dict[str, Any],
+    show_info_d1: dict[str, Any],
+    show_bala_d1: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     """Everything in this module, in the shape the raw export writes out."""
     house_signs, planet_signs = chart_positions(show_chart_d1)
     padas = arudha_padas(house_signs, planet_signs)
     karakas = chara_karakas(show_info_d1)
+    houses = house_strength(show_chart_d1, show_info_d1, show_bala_d1)
     return {
+        "houses": [
+            {
+                "house": h.house, "sign": h.sign, "sign_name": sign_name(h.sign),
+                "lord": h.lord, "planets": list(h.planets), "sav": h.sav,
+                "lord_shad_bala_percent": h.lord_shad_bala_percent,
+                "lord_shad_bala_rupas": h.lord_shad_bala_rupas,
+                "drishti_benefic": h.drishti_benefic,
+                "drishti_malefic": h.drishti_malefic,
+                "drishti_net": h.drishti_net,
+            }
+            for h in houses
+        ],
         "arudhas": [
             {
                 "house": pada.house, "name": pada.name,

@@ -117,7 +117,7 @@ def _derive(collection: Collection) -> dict[str, Any]:
     info = collection.get("show-info-D1")
     if not chart or not info:
         return {}
-    return derive_all(chart, info)
+    return derive_all(chart, info, collection.get("show-bala-D1"))
 
 
 # ---------------------------------------------------------------------------
@@ -144,7 +144,7 @@ def _raw_data(client: Client, data: Collection, derived: dict[str, Any]) -> list
     out += _section_6_arudhas(derived)
     out += _section_7_lagnas(data)
     out += _section_8_bala(data)
-    out += _section_9_bhava(data)
+    out += _section_9_bhava(data, derived)
     out += _section_10_ashtakavarga(data)
     out += _section_11_yogas(data)
     out += _section_12_avasthas(data)
@@ -506,15 +506,49 @@ def _section_8_bala(data: Collection) -> list[str]:
     return out
 
 
-def _section_9_bhava(data: Collection) -> list[str]:
-    out = ["## 9. Дома: геометрия бхава-чалиты", ""]
-    bhava = data.get("show-bhava-D1")
+def _section_9_bhava(data: Collection, derived: dict[str, Any]) -> list[str]:
+    out = ["## 9. Сила домов", ""]
     out += [
-        "**Бхава-балы у сайта нет.** Единственная сила уровня домов среди "
-        "доступных данных — матрица дрик-балы на дома в разделе 8. Промпт 01 §9 "
-        "в этой части не выполним и помечен в MISSING_DATA.",
+        "**Бхава-балы у сайта нет, и она здесь не реконструируется.** Вместо "
+        "одного синтетического числа — три независимых показателя, каждый из "
+        "которых прослеживается до конкретной цифры сайта. Они намеренно не "
+        "складываются: сложение потребовало бы весов, которых методика не задаёт, "
+        "и дало бы правдоподобное число, которое нечем проверить.",
         "",
     ]
+    houses = (derived or {}).get("houses")
+    if houses:
+        out += _table(
+            ["Дом", "Знак", "Планеты", "Бинду САВ", "Управитель",
+             "Шадбала упр., %", "рупы", "Дришти: благ.", "неблаг.", "нетто"],
+            [
+                (h["house"], h["sign_name"], ", ".join(h["planets"]) or "—",
+                 h["sav"], h["lord"], h["lord_shad_bala_percent"],
+                 f"{h['lord_shad_bala_rupas']:.2f}" if h["lord_shad_bala_rupas"] else "",
+                 f"{h['drishti_benefic']:.0f}", f"{h['drishti_malefic']:.0f}",
+                 f"{h['drishti_net']:+.0f}")
+                for h in houses
+            ],
+        )
+        out += [
+            "",
+            "**Как читать.** «Бинду САВ» — сумма благоприятных точек, стоящих в "
+            "доме. «Шадбала управителя» — классическая Бхавадхипати-бала, взятая "
+            "как есть из раздела 8. «Дришти» — суммы вирупов из матрицы аспектов "
+            "на дома, разнесённые по натуре аспектирующей планеты; это сырые "
+            "числа сайта, а **не** Бхава-Дришти-бала: собственную дрик-балу "
+            "планет сайт считает по другой формуле, воспроизвести её из этой "
+            "матрицы не удалось.",
+            "",
+            "Дом силён, когда на него указывают все три показателя сразу. "
+            "Расхождение между ними — тоже результат, и его надо назвать.",
+            "",
+        ]
+    else:
+        out += _absent("сводка по домам")
+
+    out += ["### Геометрия бхава-чалиты", ""]
+    bhava = data.get("show-bhava-D1")
     if not bhava:
         return out + _absent("бхава-чалита")
     out += _table(
@@ -538,13 +572,19 @@ def _section_10_ashtakavarga(data: Collection) -> list[str]:
     ashtaka = (info or {}).get("ashtakavarga")
     if not ashtaka:
         return out + _absent("аштакаварга")
-    signs = [sign_name(i) for i in range(1, 13)]
-    out += _table(["Ряд"] + signs, [["САВ"] + list(ashtaka.get("sav") or [])]
+    # Bindus are given by HOUSE, not by sign: the parser reads them off the
+    # chart drawing in house order. Labelling the columns with signs would be
+    # right only for an Aries Ascendant and silently wrong for every other.
+    first = ashtaka.get("first_house_sign") or 1
+    headers = [f"{house} ({sign_name(first + house - 1)})" for house in range(1, 13)]
+    out += _table(["Ряд / дом"] + headers,
+                  [["САВ"] + list(ashtaka.get("sav") or [])]
                   + [[code] + list(values) for code, values in (ashtaka.get("bav") or {}).items()])
     out += [
         "",
-        f"Первый дом начинается со знака №{ashtaka.get('first_house_sign')}. "
-        "САВ — сумма семи планетных БАВ; БАВ Асцендента в сумму не входит.",
+        f"Колонки — **дома** 1…12, в скобках знак каждого дома; в первом доме "
+        f"знак №{first}. САВ — сумма семи планетных БАВ; БАВ Асцендента в сумму "
+        "не входит.",
         "",
         f"Трикона-шодхана, Экадхипатья-шодхана, Шодхья-пинда, Раши-пинда, "
         f"Граха-пинда, Какшья и Прастара: `{UNAVAILABLE}` — сайт их не выводит.",
