@@ -1,0 +1,10 @@
+{
+  "name": "jyotish",
+  "displayName": "Разбор карты Джйотиш",
+  "version": "0.1.0",
+  "description": "Конвейер разбора натальной карты: десять этапов методики, сбор данных с vedic-horo, детерминированные расчёты и контроль качества",
+  "author": { "name": "serg123e" },
+  "homepage": "https://github.com/serg123e/joytish-map",
+  "repository": "https://github.com/serg123e/joytish-map",
+  "keywords": ["jyotish", "vedic-astrology", "джйотиш"]
+}

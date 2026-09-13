@@ -95,20 +95,29 @@ HTML-фрагменты без Cloudflare-челленджа и без авто�
 vedic-parser/                  внешняя зависимость, чистые данные
 └── vedic_parser/              session, show-info/chart/other/dasha/bala …
 
-joytish-map/
-├── prompts/                   01…10 — методика, единственный источник правды
-├── templates/11_report.html   вёрстка PDF
-├── jyotish/
-│   ├── collect.py             этап 01: парсер → raw/*.json (с кэшем)
-│   ├── derive.py              класс B: арудхи, диспозиторы, шодханы, гандантa
-│   ├── render_raw.py          raw/*.json → RAW_DATA.md + MISSING_DATA.md
-│   ├── soul_path.py           этап 07: веса × баллы, подшкалы, таблица
-│   ├── validate.py            класс D: чек-лист 10 + правила README
-│   └── report.py              md → html по шаблону → pdf
-├── .claude/skills/jyotish/    SKILL.md: как вести разбор, гейты, формат сводок
-├── .claude/commands/          /jyotish-collect, /jyotish-stage, /jyotish-qa
-└── clients/<slug>/            состояние разбора, в .gitignore
+joytish-map/                   маркетплейс плагинов Claude Code
+├── .claude-plugin/marketplace.json
+└── plugins/jyotish/           один плагин, самодостаточный
+    ├── .claude-plugin/plugin.json
+    ├── prompts/               01…10 — методика, единственный источник правды
+    ├── templates/             вёрстка PDF
+    ├── skills/jyotish-reading/SKILL.md   порядок этапов, гейты, формат сводок
+    ├── commands/              /jyotish:collect, /jyotish:stage, /jyotish:check …
+    ├── jyotish/
+    │   ├── collect.py         этап 01: парсер → raw/*.json (с кэшем)
+    │   ├── derive.py          класс B: арудхи, диспозиторы, чара-караки
+    │   ├── render_raw.py      raw/*.json → RAW_DATA.md + MISSING_DATA.md
+    │   ├── soul_path.py       этап 07: веса × баллы, подшкалы, таблица
+    │   ├── patterns.py        10 паттернов и правило независимости
+    │   ├── validate.py        класс D: чек-лист 10 + правила README
+    │   └── report.py          md → html по шаблону → pdf (фаза 5)
+    └── tests/
+clients/<slug>/                состояние разбора, в .gitignore
 ```
+
+Плагин самодостаточен намеренно: `${CLAUDE_PLUGIN_ROOT}` не дотягивается за
+пределы каталога плагина, поэтому промпты, шаблон и код лежат внутри него, а не
+в корне репозитория.
 
 Состояние одного разбора:
 
